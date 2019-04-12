@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.IO;
+using System.Threading.Tasks;
 using ApplicationCore.Application.Interfaces.Claims;
 
 namespace ApplicationCore.Application.Claims
@@ -8,7 +10,16 @@ namespace ApplicationCore.Application.Claims
 
         public async Task<bool> ManageClaimAsync(PhoneClaimModel model)
         {
-            return await Task.FromResult(true);
+            if (string.IsNullOrEmpty(model.FileName))
+            {
+                throw new InvalidDataException("Filename cannot be null or empty");
+            }
+
+            return await Task.Run(() =>
+            {
+                Task.Delay(TimeSpan.FromSeconds(1));
+                return true;
+            });
         }
     }
 }

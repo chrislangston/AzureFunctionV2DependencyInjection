@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using ApplicationCore.Application.Claims;
 using ApplicationCore.Application.Interfaces.Claims;
 using Microsoft.Azure.WebJobs;
-using Microsoft.Azure.WebJobs.Host;
 using Microsoft.Extensions.Logging;
 
 namespace PhoneClaimsFunctionApp
@@ -17,7 +16,6 @@ namespace PhoneClaimsFunctionApp
         {
             _phoneClaimsManager = phoneClaimsManager;
         }
-
 
         [FunctionName("BlobTriggeredInboundPhoneClaimFunction")]
         public async Task Run([BlobTrigger("inbound-phone-claims/{name}", Connection = "StorageConnectionSettings")]Stream myBlob, 
@@ -44,8 +42,5 @@ namespace PhoneClaimsFunctionApp
                 throw;
             }
         }
-
-
-
     }
 }
